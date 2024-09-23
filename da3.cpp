@@ -27,8 +27,18 @@ void didItThrow(const function<void()> &ff, bool &threw) {
     //return;
 }
 
-
+// Recursive function
 int gcd(int a, int b) {
-    return 42;  // DUMMY
-    // TODO: WRITE THIS!!!
+
+    // base case
+    if (a == 0) {
+        return b;
+    }
+
+    // recursive case
+    if (a > b) {
+        return gcd(b, a);
+    }
+
+    return gcd(b % a, a);
 }

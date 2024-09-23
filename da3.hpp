@@ -23,15 +23,13 @@ ValueType lookup(const LLNode<ValueType> *head, std::size_t index) {
         ++size;
     }
 
-    head == nullptr;
-
-    if (index > size) {
-        throw std::out_of_range("Index is out of range");
+    if (index >= size) {
+        throw std::out_of_range("Index out of range");
     }
 
     try {
         return index;
-    } catch (std::out_of_range & e) {
+    } catch (const std::out_of_range &e) {
         return e.what();
     }
 
@@ -46,24 +44,33 @@ void didItThrow(const std::function<void()> &ff, bool &threw);
 template <typename FDIter>
 bool checkSorted(FDIter first, FDIter last) {
     
-    FDIter next = first;
-    ++next;
+    FDIter previous = first;
 
     if (first < last) {
 
-        while (first < next && first < last) {
-            ++first;
-            ++next;
+        ++first;
 
-            if (next < first) {
-                return false;
-            } else {
+        while (first != last) {
+            //++first;
+
+            if (*first < *previous) {
                 return false;
             }
+            previous = first;
+            ++first;
         }
+        return true;
+        
+    } else {
+        return false;
     }
+    return true;
 }
 
+template <typename FDIter>
+bool operator<(const FDIter &first, const FDIter &other) {
+    return first < other;
+}
 
 // Implementation in source file
 int gcd(int a, int b);
