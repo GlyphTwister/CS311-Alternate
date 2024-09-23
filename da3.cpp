@@ -7,18 +7,28 @@
 
 #include <functional>
 using std::function;
+#include <exception>
+using std::exception;
 
 
-void didItThrow(const function<void()> & ff,
-                bool & threw)
-{
-    // TODO: WRITE THIS!!!
+void didItThrow(const function<void()> &ff, bool &threw) {
+    
+    try {
+        ff();
+        threw = false;
+        return;
+    }
+
+    catch (exception & e) {
+        threw = true;
+        throw;
+    }
+
+    //return;
 }
 
 
-int gcd(int a,
-        int b)
-{
+int gcd(int a, int b) {
     return 42;  // DUMMY
     // TODO: WRITE THIS!!!
 }
