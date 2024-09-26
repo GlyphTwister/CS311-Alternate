@@ -1,6 +1,6 @@
 // da3.hpp
 // Kohlby Vierthaler
-// 2024/09/24
+// 2024/09/25
 // Header file for Potpourri
 
 #ifndef FILE_DA3_HPP_INCLUDED
@@ -13,7 +13,9 @@
 #include <iostream>    // For std::cerr and std::endl
 
 
-// Looks up a linked list
+// Accesses the data of a linked list node
+// Index parameter must be non-negative and within LLNode's size range 
+// Head parameter must not be a nullptr
 template <typename ValueType>
 ValueType lookup(const LLNode<ValueType> *head, std::size_t index) {
     
@@ -25,6 +27,7 @@ ValueType lookup(const LLNode<ValueType> *head, std::size_t index) {
         ++size;
     }
 
+    // Throw exception for indices greater or equal to size
     if (index >= size) {
         throw std::out_of_range("Index out of range");
     }
@@ -34,7 +37,7 @@ ValueType lookup(const LLNode<ValueType> *head, std::size_t index) {
     for (std::size_t i = 0; i < index; i++) {
         node = node->_next;
     }
-
+    
     try {
         return node->_data;
     } catch (const std::out_of_range& e) {
@@ -48,7 +51,8 @@ ValueType lookup(const LLNode<ValueType> *head, std::size_t index) {
 void didItThrow(const std::function<void()> &ff, bool &threw);
 
 
-// Check if elements are sorted
+// Check if elements in a data set are sorted
+// Parameters first and last must be valid iters
 template <typename FDIter>
 bool checkSorted(FDIter first, FDIter last) {
     
