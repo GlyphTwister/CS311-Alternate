@@ -29,7 +29,7 @@ int dim_x, int dim_y, int squaresLeft) {
     
     
     // check for full solution
-    if (int squaresLeft == 0) {
+    if (squaresLeft == 0) {
         return 1;
     }
 
@@ -45,8 +45,12 @@ int dim_x, int dim_y, int squaresLeft) {
                 if (board[i][j] == 0 && board[i + 1][j] == 0) {
                     board[i][j] = 1;
                     board[i + 1][j] = 1;
-                    squaresLeft - 2;
-                    total + holeyDTCount_recurse(board, dim_x, dim_y, squaresLeft);
+                    squaresLeft -= 2;
+                    total += holeyDTCount_recurse(board, dim_x, dim_y, squaresLeft);
+                    board[i][j] = 0;
+                    board[i + 1][j] = 0;
+                    squaresLeft += 2;
+                    //return total;
                 } 
             }
 
@@ -56,13 +60,16 @@ int dim_x, int dim_y, int squaresLeft) {
                 if (board[i][j] == 0 && board[i][j - 1] == 0) {
                     board[i][j] = 1;
                     board[i][j - 1] = 1;
-                    squaresLeft - 2;
-                    total + holeyDTCount_recurse(board, dim_x, dim_y, squaresLeft);
+                    squaresLeft -= 2;
+                    total += holeyDTCount_recurse(board, dim_x, dim_y, squaresLeft);
+                    board[i][j] = 0;
+                    board[i][j - 1] = 0;
+                    squaresLeft += 2;
+                    //return total;
                 }
             }
         }
     }
 
-    
-
+    return total;
 }
