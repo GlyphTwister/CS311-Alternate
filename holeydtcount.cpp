@@ -41,18 +41,8 @@ int dim_x, int dim_y, int squaresLeft) {
 
             // find first available square
             if (board[i][j] == 0) {
-                
+
                 // check board bounds, then try horizontal placement
-                if (i + 1 < dim_x && board[i + 1][j] == 0) {
-                    board[i][j] = 1;
-                    board[i + 1][j] = 1;
-                    total += holeyDTCount_recurse(board, dim_x, dim_y, squaresLeft - 2);
-                    board[i][j] = 0;
-                    board[i + 1][j] = 0;
-                } 
-
-
-                // check board bounds, then try vertical placement
                 if (j + 1 < dim_y && board[i][j + 1] == 0) {
                     board[i][j] = 1;
                     board[i][j + 1] = 1;
@@ -60,6 +50,15 @@ int dim_x, int dim_y, int squaresLeft) {
                     board[i][j] = 0;
                     board[i][j + 1] = 0;
                 }
+
+                // check board bounds, then try vertical placement
+                if (i + 1 < dim_x && board[i + 1][j] == 0) {
+                    board[i][j] = 1;
+                    board[i + 1][j] = 1;
+                    total += holeyDTCount_recurse(board, dim_x, dim_y, squaresLeft - 2);
+                    board[i][j] = 0;
+                    board[i + 1][j] = 0;
+                } 
 
                 return total;
             }
