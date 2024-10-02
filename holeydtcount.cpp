@@ -52,7 +52,7 @@ int dim_x, int dim_y, int squaresLeft) {
                 } 
 
 
-            // check board bounds, then try vertical placement
+                // check board bounds, then try vertical placement
                 if (j + 1 < dim_y && board[i][j + 1] == 0) {
                     board[i][j] = 1;
                     board[i][j + 1] = 1;
