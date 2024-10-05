@@ -1,14 +1,19 @@
 // holeydtcount.cpp
 // Kohlby Vierthaler
-// 2024/09/29
+// 2024/10/04
 // Source file for Recursive Backtracking
 
 #include "holeydtcount.hpp"
-#include <vector> // For board representation
 
+#include <vector> // For board representation
 using std::vector;
 
+
 // Wrapper function implementation
+// Preconditions: holes must be in range, 
+// dim_x and dim_y must be positive integers
+
+// Sets up board and calls workhorse function
 int holeyDTCount(int dim_x, int dim_y,
 int hole1_x, int hole1_y,
 int hole2_x, int hole2_y) {
@@ -18,12 +23,15 @@ int hole2_x, int hole2_y) {
     board[hole2_x][hole2_y] = 1;
     int squares = (dim_x * dim_y) - 2;
 
-    int answer = holeyDTCount_recurse(board, dim_x, dim_y, squares);
-
-    return answer;
+    return holeyDTCount_recurse(board, dim_x, dim_y, squares);
 }
 
 // Workhorse function implementation
+// Preconditions: board must be valid,
+// dim_x, dim_y, and squaresLeft must be positive integers
+
+// Recurses through a board and returns the number of
+// solutions to a holey domino tiling
 int holeyDTCount_recurse(vector<vector<int>> &board, 
 int dim_x, int dim_y, int squaresLeft) {
     
